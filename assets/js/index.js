@@ -87,10 +87,10 @@ function GenerarRespuesta() {
     // Mostrar el valor del estado final en el div
     var mensajeFinal;
     if(automata[estadoActual].R == 1){
-        mensajeFinal = "1 - Traiciona"
+        mensajeFinal = "1 - No Traiciona"
     }
     else{
-        mensajeFinal = "0 - No Traiciona"
+        mensajeFinal = "0 - Traiciona"
     }
     document.getElementById("estadoFinal").innerHTML = mensajeFinal;
 
