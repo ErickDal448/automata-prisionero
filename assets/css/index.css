@@ -1,9 +1,9 @@
 html{
-    background-color: rgb(198, 212, 212);
+    background-color: var(--background-sistema);
 }
 
 .sections{
-    background-color: rgb(198, 212, 212);
+    background-color: var(--background-sistema);
 }
 
 .card{

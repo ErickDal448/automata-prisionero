@@ -1,0 +1,48 @@
+.divOpciones, .divOpciones div{
+    background-color: var(--background-menu);
+}
+
+.divOpciones{
+    padding: 1rem;
+    border-radius: 20px;
+    flex-wrap: wrap;
+}
+
+.divOpciones div label{
+    color: antiquewhite;
+    font-weight: 500;
+}
+
+.divRespuesta {
+    width: 100%;
+    margin-top: 40px;
+    padding: 3rem;
+    background-color: var(--background-editor);
+    border-radius: 30px;
+}
+
+.divRespuesta ol li {
+    background-color: var( --background-plantillas);
+    color: antiquewhite;
+    font-weight: bold;
+    display: flex;
+
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.list-group-item::before {
+    content: counter(list-item);
+    counter-increment: list-item;
+    position: absolute;
+    left: 0;
+    margin-left: 5px;
+}
+
+footer {
+    margin-top: auto;
+}
