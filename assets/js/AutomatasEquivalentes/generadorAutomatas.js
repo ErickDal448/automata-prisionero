@@ -33,6 +33,11 @@ myWorker.onmessage = function (e) {
   // Aquí puedes actualizar tu tabla con los datos recibidos del worker
   var automatasNoEquivalentesBase = e.data;
 
+  const tituloEquivalencia = document.querySelector(".tituloEquivalencia");
+
+  tituloEquivalencia.innerHTML = 'Tabla de Automatas no equivalentes de ' + numEstados + ' estados';
+  
+
   // Mostrar los autómatas en la tabla
   var table = document.querySelector("table");
   table.innerHTML = "";
