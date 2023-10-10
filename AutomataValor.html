@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problema del Prisionero - Valor de Automatas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="./assets/css/AutomataValor.css">
+    <link rel="stylesheet" href="./assets/css/global.css">
+    <link rel="stylesheet" href="./assets/css/scrollBtn.css">
+
+</head>
+<body>
+
+    <div style="text-align: center; padding: 2rem;">
+        <h3>Problema del prisionero</h3>
+        <P>Sección de determinar el valor de un automata bajo una cadena</P>
+        
+        <div class="card" style="width: auto;  background-color: var(--background-sistema); margin: auto;">
+            <div class="card-body">
+                <h5 class="card-title">Seleccione de cuantos estados quiere él automata</h5>
+                <section style="display: flex ; flex-direction: column ;">
+                    <div class="form-check">
+                        <input class="form-check-input Rad2e" type="radio" name="flexRadioDefault" id="Rad2e">
+                        <label class="form-check-label" for="Rad2e">
+                          2 estados
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input Rad3e" type="radio" name="flexRadioDefault" id="Rad3e">
+                        <label class="form-check-label" for="Rad3e">
+                          3 estados
+                        </label>
+                      </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <form class="row g-3 needs-validation form2E" novalidate>
+        <section style="display: flex; flex-direction: column; align-items: center;" class="sections">
+           
+            <section class="sections" style="display: flex; justify-content: center; flex-wrap: wrap;">
+                <div class="card" style="width: auto;  background-color: var(--background-sistema);">
+                    <div class="card-body cardAnswer">
+                        <h5 class="card-title">E0</h5>
+                        <section style="display: flex;">
+                            <div class="divAnswer Status">
+                                <span>R0</span>
+                                <input class="inputValue form-control" type="number" id="0R0" required>
+                            </div>
+                            <div class="divAnswer Status">
+                                <span>T0</span>
+                                <input class=" inputValue form-control" type="number"  id="0T0" required>
+                            </div>
+                            <div class="divAnswer Status">
+                                <span>T1</span>
+                                <input class="inputValue form-control" type="number" id="0T1" required>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="card" style="width: auto; background-color: rgb(198, 212, 212);">
+                    <div class="card-body cardAnswer">
+                        <h5 class="card-title">E1</h5>
+                        <section style="display: flex;">
+                            <div class="divAnswer Status">
+                                <span>R1</span>
+                                <input class=" inputValue form-control" type="number" id="1R1" required>
+                            </div>
+                            <div class="divAnswer Status">
+                                <span>T0</span>
+                                <input class=" inputValue form-control"  type="number"  id="1T0" required>
+                            </div>
+                            <div class="divAnswer Status">
+                                <span>T1</span>
+                                <input class="inputValue form-control" type="number" id="1T1" required>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sections" style="margin-top: 2rem; display: flex; justify-content: center;border-radius: 1rem;">
+                <div class="card" style="width: auto;  background-color: rgb(198, 212, 212);">
+                    <div class="card-body cardAnswer">
+                        <h5 class="card-title">Cadena a analizar</h5>
+                        <section style="display: flex;">
+                            <div class="divAnswer">
+                                <input class="inputValueCadena form-control" type="text" id=""  pattern="^[01]*$">
+                                <div class="invalid-feedback">
+                                    Favor de ingresar números de 1 o 0.
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sections" style="margin-top: 2rem; display: flex; justify-content: center; ">
+                <button class="btn btn-secondary Check" type="submit" style="font-size: 1.2rem;">Enviar Cadena</button>
+            </section>
+
+            <section  class="sec__Answer sections">
+                <!-- Agregar una tabla para mostrar el autómata -->
+                <table class="tablaAutomata" id="automata">
+                    <tr>
+                    <th>Estado</th>
+                    <th>R</th>
+                    <th>T0</th>
+                    <th>T1</th>
+                    </tr>
+                    <tr>
+                    <td><strong>E0</strong></td>
+                    <td id="E0R"></td>
+                    <td id="E0T0"></td>
+                    <td id="E0T1"></td>
+                    </tr>
+                    <tr>
+                    <td><strong>E1</strong></td>
+                    <td id="E1R"></td>
+                    <td id="E1T0"></td>
+                    <td id="E1T1"></td>
+                    </tr>
+                </table>
+
+                <div id="transiciones"></div>
+
+                <!-- Agregar un div para mostrar el valor del estado final -->
+                <div id="estadoFinal"></div>
+            </section>
+        </section>
+    </form>
+
+    <form class="row g-3 needs-validation form3E" novalidate>
+        <section style="display: flex; flex-direction: column; align-items: center;" class="sections">
+            
+            <section class="sections" style="display: flex; justify-content: center; flex-wrap: wrap;">
+                <div class="card" style="width: auto;  background-color: rgb(198, 212, 212);">
+                    <div class="card-body cardAnswer">
+                        <h5 class="card-title">E0</h5>
+                        <section style="display: flex;">
+                            <div class="divAnswer Status">
+                                <span>R0</span>
+                                <input class="inputValue-3E StatusValue form-control" type="number" id="0R0-3E" required>
+                            </div>
+                            <div class="divAnswer Status">
+                                <span>T0</span>
+                                <input class=" inputValue-3E form-control" type="number"  id="0T0-3E" required>
+                            </div>
+                            <div class="divAnswer Status">
+                                <span>T1</span>
+                                <input class="inputValue-3E form-control" type="number" id="0T1-3E" required>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="card" style="width: auto; background-color: rgb(198, 212, 212);">
+                    <div class="card-body cardAnswer">
+                        <h5 class="card-title">E1</h5>
+                        <section style="display: flex;">
+                            <div class="divAnswer Status">
+                                <span>R1</span>
+                                <input class=" inputValue-3E StatusValue form-control" type="number" id="1R1-3E" required>
+                            </div>
+                            <div class="divAnswer Status">
+                                <span>T0</span>
+                                <input class=" inputValue-3E form-control"  type="number"  id="1T0-3E" required>
+                            </div>
+                            <div class="divAnswer Status">
+                                <span>T1</span>
+                                <input class="inputValue-3E form-control" type="number" id="1T1-3E" required>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                
+                <div class="card" style="width: auto; background-color: rgb(198, 212, 212);">
+                    <div class="card-body cardAnswer">
+                        <h5 class="card-title">E2</h5>
+                        <section style="display: flex;">
+                            <div class="divAnswer Status">
+                                <span>R1</span>
+                                <input class=" inputValue-3E StatusValue form-control" type="number" id="2R2-3E" required>
+                            </div>
+                            <div class="divAnswer Status">
+                                <span>T0</span>
+                                <input class=" inputValue-3E form-control"  type="number"  id="2T0-3E" required>
+                            </div>
+                            <div class="divAnswer Status">
+                                <span>T1</span>
+                                <input class="inputValue-3E form-control" type="number" id="2T1-3E" required>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sections" style="margin-top: 2rem; display: flex; justify-content: center;border-radius: 1rem;">
+                <div class="card" style="width: auto;  background-color: rgb(198, 212, 212);">
+                    <div class="card-body cardAnswer">
+                        <h5 class="card-title">Cadena a analizar</h5>
+                        <section style="display: flex;">
+                            <div class="divAnswer">
+                                <input class="inputValueCadena-3E form-control" type="text" id=""  pattern="[01]+">
+                                <div class="invalid-feedback">
+                                    Favor de ingresar números de 1 o 0.
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sections" style="margin-top: 2rem; display: flex; justify-content: center; ">
+                <button class="btn btn-secondary Check" type="submit" style="font-size: 1.2rem;">Enviar Cadena</button>
+            </section>
+
+            <section  class="sec__Answer sections">
+                <!-- Agregar una tabla para mostrar el autómata -->
+                <table class="tablaAutomata" id="automata">
+                    <tr>
+                        <th>Estado</th>
+                        <th>R</th>
+                        <th>T0</th>
+                        <th>T1</th>
+                    </tr>
+                    <tr>
+                        <td><strong>E0</strong></td>
+                        <td id="E0R-3E"></td>
+                        <td id="E0T0-3E"></td>
+                        <td id="E0T1-3E"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>E1</strong></td>
+                        <td id="E1R-3E"></td>
+                        <td id="E1T0-3E"></td>
+                        <td id="E1T1-3E"></td>
+                    </tr>
+                    <tr>
+                        <td><strong>E2</strong></td>
+                        <td id="E2R-3E"></td>
+                        <td id="E2T0-3E"></td>
+                        <td id="E2T1-3E"></td>
+                    </tr>
+                </table>
+
+                <div id="transiciones-3E"></div>
+
+                <!-- Agregar un div para mostrar el valor del estado final -->
+                <div id="estadoFinal-3E"></div>
+            </section>
+        </section>
+    </form>
+    <button class="scrollBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="gray" class="bi bi-arrow-up-circle-fill scrollSvg" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+        </svg>
+    </button>
+    <script src="./assets/js/ValoresAutomatas/selectorEstados.js"></script>
+    <script src="./assets/js/ValoresAutomatas/ValorAutomatas2E.js"></script>
+    <script src="./assets/js/ValoresAutomatas/ValorAutomatas3E.js"></script>
+    <script src="./assets/js/scrollBtn/scrollBtn.js"></script>
+</body>
+<footer style=" display: flex; justify-content: space-evenly; margin-top: auto;">
+    <section>
+        <img style="width: 4rem;" src="./assets/img/uas logo.png">
+    </section>
+    <section style="display: flex; align-items: center; flex-direction: column; justify-content: center;">
+        <h8>Erick Daniel Alba Leon</h8>
+        <p>Grupo: 4-3</p>
+    </section>
+    <section>
+        <img style="width: 5rem;" src="./assets/img/fic logo.png">
+    </section>
+</footer>
+</html>

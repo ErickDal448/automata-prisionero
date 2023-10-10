@@ -3,13 +3,25 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background-color: var(--background-sistema);
+}
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 :root{
     /*   --variable: valor;   */
     /*   Colores   */
     --background-sistema: rgb(198, 212, 212);
+    --background-card: #ece5e5;
     --background-plantillas: #608296;
     --background-menu: #608296;
     --background-editor: #3d7392;

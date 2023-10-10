@@ -1,8 +1,9 @@
+
 (() => {
     'use strict'
   
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation')
+    const forms = document.querySelectorAll('.form2E')
   
     // Loop over them and prevent submission
     Array.from(forms).forEach(form => {
@@ -109,7 +110,7 @@ var inputs = document.querySelectorAll(".inputValue");
 inputs.forEach(function(input) {
   input.addEventListener("input", function(event) {
     // Verificar si el valor del input es válido
-    if (input.value !== "0" && input.value !== "1") {
+    if (input.value !== "0" && input.value !== "1" ) {
       // Si el valor no es válido, restablecerlo a un valor válido
       input.value = "";
     } else {

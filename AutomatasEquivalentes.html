@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problema del Prisionero - Automatas NO equivalentes</title>
+
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="./assets/css/AutomataValor.css">
+    <link rel="stylesheet" href="./assets/css/global.css">
+    <link rel="stylesheet" href="./assets/css/scrollBtn.css">
+</head>
+<body>
+
+    <div style="text-align: center; padding: 2rem;">
+        <h3>Problema del prisionero</h3>
+        <p>Sección de listado de automatas no equivalentes</p>
+
+        <div class="card cardChoose" style="width: auto;  background-color: rgb(198, 212, 212); margin: auto;">
+            <div class="card-body">
+                <h5 class="card-title">Seleccione de cuantos estados quiere los automatas</h5>
+                <section style="display: flex ; flex-direction: column ;">
+                    <form>
+                    <div class="form-check">
+                        <input class="form-check-input Rad2e" type="radio" name="flexRadioDefault" id="Rad2e" required>
+                        <label class="form-check-label" for="Rad2e">
+                          2 estados
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input Rad3e" type="radio" name="flexRadioDefault" id="Rad3e" required>
+                        <label class="form-check-label" for="Rad3e">
+                          3 estados
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-secondary btnSubmit">enviar</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+        
+        <div class="card Card3E" style="width: auto;  background-color: rgb(198, 212, 212); margin: 2rem 0rem;">
+            <div class="card-body cardAnswer">
+                <h6 class="card-title">Tabla de Automatas no equivalentes de n estados</h6>
+                <table class="table table-secondary table-striped table-hover" >
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">E0</th>
+                        <th scope="col">E1</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card CardCharge" style="width: auto;  background-color: rgb(198, 212, 212); margin: 2rem 0rem;">
+            <div class="card-body cardAnswer">
+                <img src="./assets/img/charge.gif" alt="cargando..." style="width: 6rem;">
+            </div>
+        </div>
+
+        <button class="scrollBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="gray" class="bi bi-arrow-up-circle-fill scrollSvg" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+            </svg>
+        </button>
+    </div>   
+    <script src="./assets/js/AutomatasEquivalentes/generadorAutomatas.js"></script>
+    <script src="./assets/js/scrollBtn/scrollBtn.js"></script>
+</body>
+<footer style=" display: flex; justify-content: space-evenly; margin-top: auto;">
+    <section>
+        <img style="width: 4rem;" src="./assets/img/uas logo.png">
+    </section>
+    <section style="display: flex; align-items: center; flex-direction: column; justify-content: center;">
+        <h8>Erick Daniel Alba Leon</h8>
+        <p>Grupo: 4-3</p>
+    </section>
+    <section>
+        <img style="width: 5rem;" src="./assets/img/fic logo.png">
+    </section>
+</footer>
+</html>
