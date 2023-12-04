@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="./assets/css/scrollBtn.css">
 </head>
 <body>
-
+    <a href="./index.html"><button type="button" class="btn btn-secondary">Regresar a inicio</button></a>
     <div style="text-align: center; padding: 2rem;">
         <h3>Problema del prisionero</h3>
         <p>Sección de listado de automatas no equivalentes</p>
@@ -36,31 +36,38 @@
                           3 estados
                         </label>
                     </div>
+                    <div class="form-check">
+                        <input class="form-check-input Rad4e" type="radio" name="flexRadioDefault" id="Rad4e" required>
+                        <label class="form-check-label" for="Rad4e">
+                          4 estados
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input Rad5e" type="radio" name="flexRadioDefault" id="Rad5e" required>
+                        <label class="form-check-label" for="Rad5e">
+                          5 estados
+                        </label>
+                    </div>
                     <button type="submit" class="btn btn-secondary btnSubmit">enviar</button>
                     </form>
                 </section>
+            </div>
+        </div>
+
+        <div class="card cardBest" style="width: auto;  background-color: rgb(198, 212, 212); margin: 2rem 0rem;">
+            <div class="card-body">
+                <h6 class="card-title">El mejor automata de la lista es: </h6>
+                <table class="table table-light table-hover table-striped TableTheBest" >
+                   
+                </table>
             </div>
         </div>
         
         <div class="card Card3E" style="width: auto;  background-color: rgb(198, 212, 212); margin: 2rem 0rem;">
             <div class="card-body cardAnswer">
                 <h6 class="card-title tituloEquivalencia">Tabla de Automatas no equivalentes de n estados</h6>
-                <table class="table table-secondary table-striped table-hover" >
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">E0</th>
-                        <th scope="col">E1</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                    </tbody>
+                <table class="table table-light table-hover  table-striped ListaAutomatas" >
+                    
                 </table>
             </div>
         </div>
@@ -92,4 +99,120 @@
         <img style="width: 5rem;" src="./assets/img/fic logo.png">
     </section>
 </footer>
+<script>
+    function generar(automata){
+        let automatas = [];
+        if(automata == 2){
+            for (let i = 0; i < 8; i++) {
+                for (let j = 0; j < 8; j++) {
+                    let automata1 = i.toString(2).padStart(3, "0");
+                    let automata2 = j.toString(2).padStart(3, "0");
+                    // Filtro para evitar autómatas con el mismo valor en el primer dígito de cada estado
+                    if (automata1[0] === automata2[0] ) {
+                                    continue;
+                                }
+
+                                //filtro para evitar redundancia en el primer estado
+                    if (automata1[1] == 0 && automata1[2] == 0 ){
+                        continue;
+                    }
+
+                    automatas.push([
+                        parseInt(automata1[0]), parseInt(automata1[1]), parseInt(automata1[2]),
+                        parseInt(automata2[0]), parseInt(automata2[1]), parseInt(automata2[2])
+                    ]);
+                }
+            }
+        }
+        if(automata == 3){
+            for (let i = 0; i < 2; i++) {
+            for (let j = 0; j < 3; j++) {
+                for (let k = 0; k < 3; k++) {
+                for (let l = 0; l < 2; l++) {
+                    for (let m = 0; m < 3; m++) {
+                    for (let n = 0; n < 3; n++) {
+                        for (let o = 0; o < 2; o++) {
+                        for (let p = 0; p < 3; p++) {
+                            for (let q = 0; q < 3; q++) {
+                                let automata1 = [i, j, k];
+                                let automata2 = [l, m, n];
+                                let automata3 = [o, p, q];
+                                // Filtro para evitar autómatas con el mismo valor en el primer dígito de cada tercia
+                                if (automata1[0] === automata2[0] && automata2[0] === automata3[0]) {
+                                    continue;
+                                }
+                                 //filtro para evitar redundancia en el primer estado
+                                if (automata1[1] == 0 && automata1[2] == 0 ){
+                        continue;
+                    }
+                                automatas.push([i, j, k, l, m, n, o, p, q]);
+                            }
+                        }
+                        }
+                    }
+                    }
+                }
+                }
+            }
+            }
+        }
+        if(automata == 4){
+            for (let i = 0; i < 2; i++) {
+            for (let j = 0; j < 4; j++) {
+                for (let k = 0; k < 4; k++) {
+                for (let l = 0; l < 2; l++) {
+                    for (let m = 0; m < 4; m++) {
+                    for (let n = 0; n < 4; n++) {
+                        for (let o = 0; o < 2; o++) {
+                        for (let p = 0; p < 4; p++) {
+                            for (let q = 0; q < 4; q++) {
+                            for (let r = 0; r < 2; r++) {
+                                for (let s = 0; s < 4; s++) {
+                                for (let t = 0; t < 4; t++) {
+                                    let automata1 = [i, j, k];
+                                    let automata2 = [l, m, n];
+                                    let automata3 = [o, p, q];
+                                    let automata4 = [r, s, t];
+
+                                    // Filtro para evitar autómatas con el mismo valor en el primer dígito de cada tercia
+                                    if (automata1[0] === automata2[0] && automata2[0] === automata3[0] && automata3[0] === automata4[0]) {
+                                    continue;
+                                    }
+ //filtro para evitar redundancia en el primer estado
+                                if (automata1[1] == 0 && automata1[2] == 0 ){
+                        continue;
+                    }
+                                    
+
+                                    automatas.push([i, j, k, l, m, n, o, p, q, r, s, t]);
+                                }
+                                }
+                            }
+                            }
+                        }
+                        }
+                    }
+                    }
+                }
+                }
+            }
+            }
+        }
+        if(automata == 5){
+            // Crea un nuevo Web Worker
+            let worker = new Worker('assets/js/AutomatasEquivalentes/worker5estados.js');
+
+            // Envía un mensaje al Web Worker para iniciar la generación de autómatas
+            worker.postMessage('start');
+
+            // Escucha los mensajes del Web Worker
+            worker.onmessage = function(event) {
+            // Imprime los autómatas generados por el Web Worker
+            console.log(event.data);
+            };
+        }
+
+        console.log(automatas)
+    }
+</script>
 </html>
