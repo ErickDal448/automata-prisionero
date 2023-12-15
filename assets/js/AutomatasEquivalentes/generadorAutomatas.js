@@ -292,20 +292,24 @@ document.querySelector("form").addEventListener("submit", function (event) {
   var numEstados;
   if (document.getElementById("Rad2e").checked) {
     numEstados = 2;
+    document.querySelector(".TheBest4").style.display = 'none';
     downloadCard.style.display = 'none';
   }
   if (document.getElementById("Rad3e").checked) {
     numEstados = 3;
+    document.querySelector(".TheBest4").style.display = 'none';
     downloadCard.style.display = 'none';
   }
   if (document.getElementById("Rad4e").checked) {
     numEstados = 4;
+    document.querySelector(".TheBest4").style.display = 'block';
     downloadCard.style.display = 'block';
     cardBest.style.display = 'none';
     Card3E.style.display = 'none';
   }
   if (document.getElementById("Rad5e").checked) {
     numEstados = 5;
+    document.querySelector(".TheBest4").style.display = 'none';
     downloadCard.style.display = 'block';
     cardBest.style.display = 'none';
     Card3E.style.display = 'none';
