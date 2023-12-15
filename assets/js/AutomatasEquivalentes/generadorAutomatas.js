@@ -1,4 +1,4 @@
-// Creas el Web Worker
+// Web Worker
 const myWorker = new Worker("assets/js/AutomatasEquivalentes/worker.js");
 const BestWorker = new Worker(
   "assets/js/AutomatasEquivalentes/workerTheBest.js"
@@ -9,6 +9,7 @@ const Card3E = document.querySelector(".Card3E");
 const CardCharge = document.querySelector(".CardCharge");
 const cardChoose = document.querySelector(".cardChoose");
 const cardBest = document.querySelector(".cardBest");
+const downloadCard = document.querySelector(".downloadCard");
 
 // // Card2E.style.display = "none"
 Card3E.style.display = "none";
@@ -20,7 +21,7 @@ const Sel3E = document.querySelector(".Rad3e");
 const Sel4E = document.querySelector(".Rad4e");
 const Sel5E = document.querySelector(".Rad5e");
 
-// Pasas los datos al worker
+// Pasar los datos al worker
 myWorker.postMessage({
   Card3E: Card3E.style.display,
   CardCharge: CardCharge.style.display,
@@ -29,7 +30,7 @@ myWorker.postMessage({
 });
 
 var numEstados;
-// Manejas la respuesta del worker
+// Manejar la respuesta del worker
 myWorker.onmessage = function (e) {
   console.log("Message received from worker", e.data);
   if (document.getElementById("Rad2e").checked) {
@@ -38,7 +39,7 @@ myWorker.onmessage = function (e) {
   if (document.getElementById("Rad3e").checked) {
     numEstados = 3;
   }
-  // Aquí puedes actualizar tu tabla con los datos recibidos del worker
+  // actualizar tabla con los datos del worker
   var automatasNoEquivalentesBase = e.data;
 
   const tituloEquivalencia = document.querySelector(".tituloEquivalencia");
@@ -102,7 +103,7 @@ myWorker.onmessage = function (e) {
   if (automatasNoEquivalentesBase.length >= 22 && numEstados == 2) {
     cardBest.style.display = "flex";
     cardChoose.style.display = "flex";
-    // Pasas los datos al worker
+    // Pasar los datos al worker
     BestWorker.postMessage({
       Automatas: automatasNoEquivalentesBase,
     });
@@ -118,65 +119,9 @@ myWorker.onmessage = function (e) {
 
 BestWorker.onmessage = function (e) {
   automatasNoEquivalentesBase = e.data.Automatas;
+
   TheBest = e.data.TheBests;
   console.log(TheBest);
-  //Mostrar el mejor Automata en su respectiva tabla
-  var table = document.querySelector(".TableTheBest");
-  table.innerHTML = "";
-  var thead = document.createElement("thead");
-  thead.innerHTML =
-    "<tr>" +
-    '<th scope="col" class="table-secondary">#</th>' +
-    '<th scope="col">E0</th>' +
-    '<th scope="col">E1</th>' +
-    (numEstados == 3 ? '<th scope="col">E2</th>' : "") +
-    '<th scope="col" class="table-secondary"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">' +
-    '<path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>' +
-    '<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/>' +
-    '</svg> </th>' +
-    "</tr>";
-  table.appendChild(thead);
-
-  var tbody = document.createElement("tbody");
-
-  for (let index = 0; index < TheBest.length; index++) {
-    var tr = document.createElement("tr");
-    tr.innerHTML =
-      '<th scope="row" class="table-secondary">' +
-      (index + 1) +
-      "</th>" +
-      "<td>" +
-      TheBest[index].automata[0] +
-      " " +
-      TheBest[index].automata[1] +
-      " " +
-      TheBest[index].automata[2] +
-      "</td>" +
-      "<td>" +
-      TheBest[index].automata[3] +
-      " " +
-      TheBest[index].automata[4] +
-      " " +
-      TheBest[index].automata[5] +
-      "</td>" +
-      (numEstados == 3
-        ? "<td>" +
-          TheBest[index].automata[6] +
-          " " +
-          TheBest[index].automata[7] +
-          " " +
-          TheBest[index].automata[8] +
-          "</td>"
-        : "") +
-      "<td class='table-secondary'>" +
-      TheBest[index].puntosTotales +
-      "</td>";
-
-    tbody.appendChild(tr);
-  }
-
-  // Terminamos de procesar, adjuntamos tbody y ocultamos el div de carga
-  table.appendChild(tbody);
 
   // Mostrar los autómatas en la tabla
   var table = document.querySelector(".ListaAutomatas");
@@ -191,7 +136,7 @@ BestWorker.onmessage = function (e) {
     '<th scope="col" class="table-secondary"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">' +
     '<path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>' +
     '<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/>' +
-    '</svg> </th>' +
+    "</svg> </th>" +
     "</tr>";
   table.appendChild(thead);
 
@@ -269,9 +214,71 @@ BestWorker.onmessage = function (e) {
     }
     tbody.appendChild(tr);
   }
+  
+  // Terminamos de procesar, adjuntamos tbody y ocultamos el div de carga
+  table.appendChild(tbody);
+  Automatas10 = automatasNoEquivalentesBase;
+  Automatas10.sort(function (a, b) {
+    return a.puntosTotales - b.puntosTotales;
+  });
+  //Mostrar el mejor Automata en su respectiva tabla
+  var table = document.querySelector(".TableTheBest");
+  table.innerHTML = "";
+  var thead = document.createElement("thead");
+  thead.innerHTML =
+    "<tr>" +
+    '<th scope="col" class="table-secondary">#</th>' +
+    '<th scope="col">E0</th>' +
+    '<th scope="col">E1</th>' +
+    (numEstados == 3 ? '<th scope="col">E2</th>' : "") +
+    '<th scope="col" class="table-secondary"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">' +
+    '<path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>' +
+    '<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/>' +
+    "</svg> </th>" +
+    "</tr>";
+  table.appendChild(thead);
+
+  var tbody = document.createElement("tbody");
+
+  for (let index = 0; index < 10; index++) {
+    var tr = document.createElement("tr");
+    tr.innerHTML =
+      '<th scope="row" class="table-secondary">' +
+      (index + 1) +
+      "</th>" +
+      "<td>" +
+      Automatas10[index][0] +
+      " " +
+      Automatas10[index][1] +
+      " " +
+      Automatas10[index][2] +
+      "</td>" +
+      "<td>" +
+      Automatas10[index][3] +
+      " " +
+      Automatas10[index][4] +
+      " " +
+      Automatas10[index][5] +
+      "</td>" +
+      (numEstados == 3
+        ? "<td>" +
+          Automatas10[index][6] +
+          " " +
+          Automatas10[index][7] +
+          " " +
+          Automatas10[index][8] +
+          "</td>"
+        : "") +
+      "<td class='table-secondary'>" +
+      Automatas10[index].puntosTotales +
+      "</td>";
+
+    tbody.appendChild(tr);
+  }
 
   // Terminamos de procesar, adjuntamos tbody y ocultamos el div de carga
   table.appendChild(tbody);
+
 };
 
 // Agregar un eventListener al botón de submit
@@ -285,18 +292,26 @@ document.querySelector("form").addEventListener("submit", function (event) {
   var numEstados;
   if (document.getElementById("Rad2e").checked) {
     numEstados = 2;
+    downloadCard.style.display = 'none';
   }
   if (document.getElementById("Rad3e").checked) {
     numEstados = 3;
+    downloadCard.style.display = 'none';
   }
   if (document.getElementById("Rad4e").checked) {
     numEstados = 4;
+    downloadCard.style.display = 'block';
+    cardBest.style.display = 'none';
+    Card3E.style.display = 'none';
   }
   if (document.getElementById("Rad5e").checked) {
     numEstados = 5;
+    downloadCard.style.display = 'block';
+    cardBest.style.display = 'none';
+    Card3E.style.display = 'none';
   }
 
-  if (numEstados < 4) {
+  if (numEstados <= 3) {
     CardCharge.style.display = "flex";
     cardChoose.style.display = "none";
     Card3E.style.display = "none";

@@ -32,3 +32,13 @@ input::-webkit-inner-spin-button {
     --montserrat: 'Montserrat', sans-serif;
     --karla: 'Karla', sans-serif;
 }  
+
+@media screen and (max-width: 400px){
+  footer img{
+    display: none;
+  }
+
+  footer p, h8{
+    text-align: center;
+  }
+}

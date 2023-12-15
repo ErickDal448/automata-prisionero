@@ -1,3 +1,8 @@
+.mainDiv{
+    height: auto;
+    padding: 2rem;
+}
+
 .divOpciones, .divOpciones div{
     background-color: var(--background-menu);
 }
@@ -46,3 +51,12 @@
 footer {
     margin-top: auto;
 }
+
+@media screen and (max-width: 400px){
+    .divRespuesta{
+        padding: 1rem;
+    }
+    .mainDiv{
+        padding: 2rem 1rem;
+    }
+  }
